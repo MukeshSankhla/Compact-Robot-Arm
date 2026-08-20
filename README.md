@@ -76,7 +76,12 @@ Compact Robot Arm/
 
 ## Circuit & Wiring Diagram
 
-The logical flow of signals follows the system Block Diagram ([BD.png](file:///c:/Users/MAKERBRAINS/Downloads/Compact%20Robot%20Arm/BD.png)) and the wiring layout ([Circuit Connections.png](file:///c:/Users/MAKERBRAINS/Downloads/Compact%20Robot%20Arm/Circuit%20Connections.png)). 
+![Block Diagram](BD.png)
+
+The logical flow of signals follows the system Block Diagram (`BD.png`) and the wiring layout (`Circuit Connections.png`).
+
+![Circuit Diagram](Circuit%20Connections.png)
+
 ---
 
 ## Pin Mapping
