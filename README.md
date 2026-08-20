@@ -1,5 +1,7 @@
 # ESP32-Controlled 5-Axis Compact Robot Arm
 
+![Block Diagram](BD.png)
+
 This project is a high-performance recreation and upgrade of the 3D-printable [Compact Robot Arm (Arduino) by Build Some Stuff](https://www.printables.com/model/818975-compact-robot-arm-arduino-3d-printed). While the original design utilized a passive analog mimic controller, this version leverages the **ESP32** microcontroller coupled with a **PCA9685 16-channel 12-bit PWM driver** to offer dual-mode operation: **tactile physical joystick control** and a **remote WiFi-based web dashboard** featuring a real-time responsive SVG forward-kinematics visualization.
 
 ---
@@ -75,10 +77,6 @@ Compact Robot Arm/
 ---
 
 ## Circuit & Wiring Diagram
-
-![Block Diagram](BD.png)
-
-The logical flow of signals follows the system Block Diagram (`BD.png`) and the wiring layout (`Circuit Connections.png`).
 
 ![Circuit Diagram](Circuit%20Connections.png)
 
