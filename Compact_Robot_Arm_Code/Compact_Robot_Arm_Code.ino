@@ -54,6 +54,9 @@ WebServer server(80);
 #define SERVO_MIN 150
 #define SERVO_MAX 600
 
+#define M4_MIN 70
+#define M4_MAX 110
+
 // =====================================================
 // HOME POSITION
 // =====================================================
@@ -78,7 +81,7 @@ int J2Y_CENTER;
 // =====================================================
 
 #define DEADZONE 260
-#define SPEED    1.5
+#define SPEED    1
 #define SAMPLES  8
 
 // =====================================================
@@ -87,7 +90,14 @@ int J2Y_CENTER;
 
 void setServo(uint8_t channel, float angle)
 {
-  angle = constrain(angle, 0, 180);
+  if (channel == M4_CH)
+  {
+    angle = constrain(angle, M4_MIN, M4_MAX);
+  }
+  else
+  {
+    angle = constrain(angle, 0, 180);
+  }
 
   int pulse = map(
     (int)angle,
@@ -108,8 +118,16 @@ void setServo(uint8_t channel, float angle)
 void slowMove(uint8_t channel, float fromAngle, float toAngle,
               float stepSize = 0.8f, int msPerStep = 8)
 {
-  fromAngle = constrain(fromAngle, 0, 180);
-  toAngle   = constrain(toAngle,   0, 180);
+  if (channel == M4_CH)
+  {
+    fromAngle = constrain(fromAngle, M4_MIN, M4_MAX);
+    toAngle   = constrain(toAngle,   M4_MIN, M4_MAX);
+  }
+  else
+  {
+    fromAngle = constrain(fromAngle, 0, 180);
+    toAngle   = constrain(toAngle,   0, 180);
+  }
 
   if (fromAngle < toAngle)
   {
@@ -1108,7 +1126,7 @@ setInterval(async () => {
     promises.push(sendJoyMove(3, uiM3));
   }
   if (Math.abs(ny2) > DEAD_UI) {
-    uiM4 = Math.max(0, Math.min(180, uiM4 + ny2 * SPEED_UI));
+    uiM4 = Math.max(30, Math.min(150, uiM4 + ny2 * SPEED_UI));
     promises.push(sendJoyMove(4, uiM4));
   }
 
@@ -1200,7 +1218,7 @@ void handleMotor()
       break;
 
     case 4:
-      M4 = angle;
+      M4 = constrain(angle, M4_MIN, M4_MAX);
       setServo(M4_CH, M4);
       break;
 
@@ -1446,7 +1464,7 @@ void loop()
   if (j2y != 0)
   {
     M4 += j2y * SPEED;
-    M4  = constrain(M4, 0, 180);
+    M4  = constrain(M4, M4_MIN, M4_MAX);
     setServo(M4_CH, M4);
   }
 
